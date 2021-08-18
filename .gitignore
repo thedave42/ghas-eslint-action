@@ -1,0 +1,4 @@
+.env
+list-analysis.sh
+rm-analysis.sh
+eslint.sarif

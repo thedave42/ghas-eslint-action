@@ -1,8 +1,5 @@
 #!/bin/sh
 
-GITHUB_TOKEN='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'
-GITHUB_REPOSITORY='thedave42/ghas-eslint-action'
-
 REPO=${GITHUB_REPOSITORY#*/}
 
 echo $REPO
@@ -13,9 +10,11 @@ mkdir -p /home/runner/work/$REPO
 #ln -s /github/workspace/. /home/runner/work/ghas-eslint-action/ghas-eslint-action
 ln -s /github/workspace/. /home/runner/work/$REPO/$REPO 
 
-/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o /tmp/eslint.sarif /home/runner/work/$REPO/$REPO/tests/.
+#cd /github/workspace
+cd /home/runner/work/$REPO/$REPO
+/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif /home/runner/work/$REPO/$REPO/tests/.
 
-DATA=`gzip -cf /tmp/eslint.sarif | base64 -w0`
+DATA=`gzip -cf eslint.sarif | base64 -w0`
 
 echo $DATA
 
