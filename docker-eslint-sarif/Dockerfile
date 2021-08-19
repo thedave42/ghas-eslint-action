@@ -11,7 +11,7 @@ RUN set -eux \
 WORKDIR /eslint
 COPY ./ /eslint
 RUN set -eux \
-	&& npm install global --production --remove-dev eslint @microsoft/eslint-formatter-sarif minimist@0.2.1\
+	&& npm install global --production --remove-dev eslint @microsoft/eslint-formatter-sarif minimist mkdirp\
 	&& /eslint/node_modules/eslint/bin/eslint.js --version | grep -E '^v?[0-9]+'
 
 # Remove unecessary files
