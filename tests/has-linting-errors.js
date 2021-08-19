@@ -1,3 +1,4 @@
+'use strict'
 const config = require('./config');
 const crypto = require('crypto');
 
@@ -14,7 +15,6 @@ const encrypt = (value) =>
 
 const decrypt= (value) => 
 {
-    'use strict'
     const [encValue, ivString] = value.split('.')
     const locIv = Buffer.from(ivString, 'hex');
     const decipher = crypto.createDecipheriv(algorithm, cryptokey, locIv);

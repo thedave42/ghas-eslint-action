@@ -1,18 +1,12 @@
 #!/bin/sh
 
 REPO=${GITHUB_REPOSITORY#*/}
+TIMESTAMP=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+SRC_DIR=$1; shift
+ESLINT_OPTS=$@
 
-echo $REPO
-
-#mkdir -p /home/runner/work/ghas-eslint-action
-mkdir -p /home/runner/work/$REPO
-
-#ln -s /github/workspace/. /home/runner/work/ghas-eslint-action/ghas-eslint-action
-ln -s /github/workspace/. /home/runner/work/$REPO/$REPO 
-
-#cd /github/workspace
-cd /home/runner/work/$REPO/$REPO
-/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif /home/runner/work/$REPO/$REPO/tests/.
+cd /github/workspace
+/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif $ESLINT_OPTS $SRC_DIR
 
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
@@ -22,5 +16,11 @@ curl \
   -X POST \
   -H "Accept: application/vnd.github.v3+json" \
   -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/repos/thedave42/ghas-eslint-action/code-scanning/sarifs \
-  -d "{\"commit_sha\":\"3858cb716d1ec932d6cdaaaf6681f3653d0e81be\",\"ref\":\"refs/heads/main\",\"sarif\":\"$DATA\"}"
+  https://api.github.com/repos/thedave42/$REPO/code-scanning/sarifs \
+  -d "{ \
+        \"commit_sha\":\"$GITHUB_SHA\", \
+        \"ref\":\"$GITHUB_REF\", \
+        \"checkout_uri\":\"file:///github/workspace\", \
+        \"started_at\":\"$TIMESTAMP\", \
+        \"sarif\":\"$DATA\" \
+      }" 
