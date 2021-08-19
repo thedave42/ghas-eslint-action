@@ -12,7 +12,7 @@ DATA=`gzip -cf eslint.sarif | base64 -w0`
 
 echo $DATA
 
-echo curl \
+curl \
   -X POST \
   -H "Accept: application/vnd.github.v3+json" \
   -H "Authorization: token $GITHUB_TOKEN" \

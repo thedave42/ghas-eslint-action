@@ -10,9 +10,15 @@ inputs:
     description: 'Options to pass to the eslint command line'
     required: false
     default: ''
+  github-token:
+    description: 'The token used to access the repo and write the security results.  Defaults to GITHUB_TOKEN.'
+    required: false
+    default: ${{ github.token }}
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.src-dir }}
     - ${{ inputs.eslint-opts }}
+  env:
+    - GITHUB_TOKEN: ${{ inputs.github-token }}
