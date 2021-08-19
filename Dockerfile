@@ -1,5 +1,5 @@
 FROM ghcr.io/thedave42/docker-eslint-sarif:0.0.6
 
-COPY run.sh .
+COPY run.sh /bin
 
-ENTRYPOINT ["run.sh"]
+ENTRYPOINT ["/bin/run.sh"]
