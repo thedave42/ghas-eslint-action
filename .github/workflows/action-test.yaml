@@ -6,7 +6,7 @@ on:
       src-dir:  # id of input
         description: 'The base directory of the source code'
         required: true
-        default: '.'
+        default: './tests'
       eslint-opts:  # id of input
         description: 'Options to pass to the eslint command line'
         required: false
