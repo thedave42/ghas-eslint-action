@@ -5,8 +5,8 @@ TIMESTAMP=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 SRC_DIR=$1; shift
 ESLINT_OPTS=$@
 
-cd /github/workspace
-/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif --resolve-plugins-relative-to /github/workspace/$SRC_DIR $ESLINT_OPTS $SRC_DIR
+cd /github/workspace/$SRC_DIR
+/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif $ESLINT_OPTS .
 
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
