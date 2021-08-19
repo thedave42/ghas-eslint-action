@@ -21,4 +21,4 @@ runs:
     - ${{ inputs.src-dir }}
     - ${{ inputs.eslint-opts }}
   env:
-    - GITHUB_TOKEN: ${{ inputs.github-token }}
+    GITHUB_TOKEN: ${{ inputs.github-token }}
