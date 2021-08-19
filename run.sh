@@ -10,8 +10,6 @@ cd /github/workspace/$SRC_DIR
 
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
-echo $DATA
-
 curl \
   -X POST \
   -H "Accept: application/vnd.github.v3+json" \
