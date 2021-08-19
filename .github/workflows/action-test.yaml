@@ -32,7 +32,7 @@ jobs:
 
       - name: Build app
         run: |
-          cd ./tests
+          cd ${{ github.event.inputs.src-dir }}
           npm i
 
       - name: 'Run ESLint SARIF Action'
