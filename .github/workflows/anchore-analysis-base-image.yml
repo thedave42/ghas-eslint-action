@@ -4,20 +4,22 @@
 # and parameters, see https://github.com/anchore/scan-action. For more
 # information on Anchore's container image scanning tool Grype, see
 # https://github.com/anchore/grype
-name: Scan the base image ./Dockerfile
+name: Scan the main action ./Dockerfile
 
 on:
   workflow_dispatch:
 
 jobs:
-  Anchore-Build-Scan-for-Base:
+  Anchore-Build-Scan-for-Action:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
       
     - name: Build the Docker image
-      run: docker build ./docker-eslint-sarif/. --file ./docker-eslint-sarif/Dockerfile --tag localbuild/testimage:latest
+      run: |
+        cd ./docker-eslint-sarif
+        docker build . --file Dockerfile --tag localbuild/testimage:latest
       
     - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
       uses: anchore/scan-action@main
