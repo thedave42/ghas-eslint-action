@@ -16,7 +16,7 @@ jobs:
   eslint-sarif-test:
     name: 'ESLint SARIF Test'
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: ['14']
@@ -31,7 +31,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Build app
-        run: npm i
+        run: |
+          cd ./tests
+          npm i
 
       - name: 'Run ESLint SARIF Action'
         uses: ./
