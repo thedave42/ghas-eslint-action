@@ -20,5 +20,6 @@ curl \
         \"ref\":\"$GITHUB_REF\", \
         \"checkout_uri\":\"file:///github/workspace\", \
         \"started_at\":\"$TIMESTAMP\", \
+        \"tool_name\":\"GHAS ESLint Action\", \
         \"sarif\":\"$DATA\" \
       }" 
