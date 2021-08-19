@@ -1,0 +1,18 @@
+
+name: 'Run ESLint and upload results'
+description: 'Runs eslint and uploads results to GitHub Advanced Security'
+inputs:
+  src-dir:  # id of input
+    description: 'The base directory of the source code'
+    required: true
+    default: '.'
+  eslint-opts:  # id of input
+    description: 'Options to pass to the eslint command line'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.src-dir }}
+    - ${{ inputs.eslint-opts }}

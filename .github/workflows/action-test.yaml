@@ -1,0 +1,27 @@
+name: Test ESLint Action
+
+on:
+  workflow_dispatch:
+    src-dir:  # id of input
+      description: 'The base directory of the source code'
+      required: true
+      default: '.'
+    eslint-opts:  # id of input
+      description: 'Options to pass to the eslint command line'
+      required: false
+      default: ''
+
+jobs:
+  eslint-sarif-test:
+    name: 'ESLint SARIF Test'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v2
+
+      - name: 'Run ESLint SARIF Action'
+        uses: ./
+        with:
+          src-dir: ${{ github.event.inputs.src-dir }}
+          eslint-opts: ${{ github.event.inputs.eslint-opts }}
