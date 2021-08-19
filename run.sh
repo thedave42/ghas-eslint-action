@@ -6,7 +6,7 @@ SRC_DIR=$1; shift
 ESLINT_OPTS=$@
 
 cd /github/workspace
-/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif $ESLINT_OPTS $SRC_DIR
+/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif --resolve-plugins-relative-to /github/workspace/$SRC_DIR $ESLINT_OPTS $SRC_DIR
 
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
