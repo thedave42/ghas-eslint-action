@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const cryptokey = crypto.scryptSync(config.DS_CRYPT_KEY_SEED, 'salt', 24);
 const algorithm = config.DS_CRYPT_ALGO;
 const iv = crypto.randomBytes(16);
+const unusedVar;
 
 const encrypt = (value) => 
 {
