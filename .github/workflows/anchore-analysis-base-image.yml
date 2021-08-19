@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Anchore-Build-Scan-for-Action:
+  Anchore-Build-Scan-for-Base:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the code
