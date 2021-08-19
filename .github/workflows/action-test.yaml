@@ -16,10 +16,22 @@ jobs:
   eslint-sarif-test:
     name: 'ESLint SARIF Test'
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: ['14']
 
     steps:
       - name: 'Checkout code'
         uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build app
+        run: npm i
 
       - name: 'Run ESLint SARIF Action'
         uses: ./
