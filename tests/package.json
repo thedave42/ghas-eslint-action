@@ -31,7 +31,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^4.0.2",
-    "@microsoft/eslint-formatter-sarif": "^2.1.5",
     "jest": "^27.0.6",
     "jwt-decode": "^3.1.2"
   },

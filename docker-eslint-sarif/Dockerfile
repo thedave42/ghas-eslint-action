@@ -1,18 +1,20 @@
 # Adapted from https://github.com/cytopia/docker-eslint
 # by cytopia <cytopia@everythingcli.org>
 #
-FROM alpine:latest as builder
+FROM node:lts-alpine as builder
 
-RUN set -eux \
-	&& apk add --no-cache \
-		nodejs-current \
-		npm
+#Old way of installing nodejs/npm - cannot install npm v6 which is needed for eslint-formatter-sarif
+#
+#RUN set -eux \
+#	&& apk add --no-cache \
+#		nodejs \
+#		nodejs-npm
+# npm install 'https://gitpkg.now.sh/microsoft/sarif-sdk/src/ESLint.Formatter?main'
 
 WORKDIR /eslint
 COPY ./ /eslint
 RUN set -eux \
-	&& npm install global --production --remove-dev eslint @microsoft/eslint-formatter-sarif \
-	&& npm audit fix \
+	&& npm install global --production --remove-dev eslint 'https://gitpkg.now.sh/microsoft/sarif-sdk/src/ESLint.Formatter?main' \
 	&& /eslint/node_modules/eslint/bin/eslint.js --version | grep -E '^v?[0-9]+'
 
 # Remove unecessary files
@@ -48,5 +50,5 @@ LABEL \
 	repo="https://github.com/cytopia/docker-eslint"
 COPY --from=builder /eslint/node_modules/ /node_modules/
 RUN set -eux \
-	&& apk add --no-cache nodejs-current curl gzip\
+	&& apk add --no-cache nodejs curl\
 	&& ln -sf /node_modules/eslint/bin/eslint.js /usr/bin/eslint
