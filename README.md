@@ -59,5 +59,5 @@ The will run ESLint against a single application in the root of the repository.
             run: |
               npm i
               
-          - name: Run ESLint SARIF Action
+          - name: GHAS ESLint Action
             uses: thedave42/ghas-eslint-action@main
