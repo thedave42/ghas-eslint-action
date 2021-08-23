@@ -1,0 +1,111 @@
+{
+  "version": "2.1.0",
+  "$schema": "http://json.schemastore.org/sarif-2.1.0-rtm.4",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "ESLint",
+          "informationUri": "https://eslint.org",
+          "rules": [
+            {
+              "id": "no-unused-vars",
+              "shortDescription": {
+                "text": "disallow unused variables"
+              },
+              "helpUri": "https://eslint.org/docs/rules/no-unused-vars",
+              "properties": {
+                "category": "Variables"
+              }
+            },
+            {
+              "id": "brace-style",
+              "shortDescription": {
+                "text": "enforce consistent brace style for blocks"
+              },
+              "helpUri": "https://eslint.org/docs/rules/brace-style",
+              "properties": {
+                "category": "Stylistic Issues"
+              }
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///github/workspace/tests/has-linting-errors.js"
+          }
+        }
+      ],
+      "results": [
+        {
+          "level": "error",
+          "message": {
+            "text": "'unusedVar' is assigned a value but never used."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///github/workspace/tests/has-linting-errors.js",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 7
+                }
+              }
+            }
+          ],
+          "ruleId": "no-unused-vars",
+          "ruleIndex": 0
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "Opening curly brace does not appear on the same line as controlling statement."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///github/workspace/tests/has-linting-errors.js",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "ruleId": "brace-style",
+          "ruleIndex": 1
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "Opening curly brace does not appear on the same line as controlling statement."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///github/workspace/tests/has-linting-errors.js",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "ruleId": "brace-style",
+          "ruleIndex": 1
+        }
+      ]
+    }
+  ]
+}
