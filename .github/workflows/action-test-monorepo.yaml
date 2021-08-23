@@ -27,13 +27,13 @@ jobs:
 
       - name: Build app
         run: |
-          cd ${{ github.event.inputs.src-dir }}
+          cd /tests/has_1_error
           npm i
 
       - name: 'Run ESLint SARIF Action'
         uses: ./
         with:
-          src-dir: ./tests/has_1_error/
+          src-dir: ./tests/has_1_error
           sarif-category: has-1-error
 
   scan-has-2-warnings-app:
@@ -55,11 +55,11 @@ jobs:
 
       - name: Build app
         run: |
-          cd ${{ github.event.inputs.src-dir }}
+          cd ./tests/has_2_warnings
           npm i
 
       - name: 'Run ESLint SARIF Action'
         uses: ./
         with:
-          src-dir: ./tests/has_2_warnings/
+          src-dir: ./tests/has_2_warnings
           sarif-category: has-2-warnings
