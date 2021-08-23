@@ -1,0 +1,65 @@
+name: Test ESLint Action on Monorepo
+
+on:
+  workflow_dispatch:
+      eslint-opts:  # id of input
+        description: 'Options to pass to the eslint command line'
+        required: false
+        default: ''
+
+jobs:
+  scan-has-1-error-app:
+    name: 'Scan has-1-error app'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['14']
+
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build app
+        run: |
+          cd ${{ github.event.inputs.src-dir }}
+          npm i
+
+      - name: 'Run ESLint SARIF Action'
+        uses: ./
+        with:
+          src-dir: ./tests/has_1_error/
+          sarif-category: has-1-error
+
+  scan-has-2-warnings-app:
+    name: 'Scan has-2-warnings app'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['14']
+
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build app
+        run: |
+          cd ${{ github.event.inputs.src-dir }}
+          npm i
+
+      - name: 'Run ESLint SARIF Action'
+        uses: ./
+        with:
+          src-dir: ./tests/has_2_warnings/
+          sarif-category: has-2-warnings
