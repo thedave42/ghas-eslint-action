@@ -1,6 +1,6 @@
 # GHAS ESLint Action
 
-Runs eslint and uploads the results to GitHub Advanced security.  ESLint will use the options specified in the `.eslintrc.json`.  If you are using any additional ESLint plugins you will have to ensure they are installed as part of the Action workflow prior to the ESLint action.
+Runs eslint and uploads the results to GitHub Advanced security.  ESLint will use the options specified in the `.eslintrc.json` in the `src-dir`.  If you are using any additional ESLint plugins you will have to ensure they are installed in the `src-dir` as part of the Action workflow prior to the ESLint action.
 
 ## Inputs
 
