@@ -21,10 +21,10 @@ fi
 AUTOMATION_ID="$SARIF_CATEGORY$GITHUB_RUN_ID"
 
 cd /github/workspace/$SRC_DIR
-/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif $ESLINT_OPTS .
+/usr/bin/eslint -f @microsoft/eslint-formatter-sarif $ESLINT_OPTS . | jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' >eslint.sarif 
 
-# Command to add 'category' to SARIF
-jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' eslint.sarif
+# Command to add 'category' to SARIF file
+# jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' eslint.sarif
 
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
