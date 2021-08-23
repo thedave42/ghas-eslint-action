@@ -78,8 +78,8 @@ This workflow will run scans on two apps in a monorepo in parallel
         - cron: "20 5 * * 5"
 
     jobs:
-      scan-has-1-error-app:
-        name: 'Scan has-1-error app'
+      scan-app1:
+        name: 'Scan app 1'
         runs-on: ubuntu-latest
 
         strategy:
@@ -106,8 +106,8 @@ This workflow will run scans on two apps in a monorepo in parallel
               src-dir: ./app1
               sarif-category: app1
 
-      scan-has-2-warnings-app:
-        name: 'Scan has-2-warnings app'
+      scan-app2:
+        name: 'Scan app2'
         runs-on: ubuntu-latest
 
         strategy:
