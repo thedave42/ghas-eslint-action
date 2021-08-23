@@ -47,8 +47,8 @@ RUN set -eux \
 FROM alpine:latest
 LABEL \
 	maintainer="the Dave <dave@digitalnosie.net>" \
-	repo="https://github.com/cytopia/docker-eslint"
+	repo="https://github.com/thedave42/ghas-eslint-action/tree/main/docker-eslint-sarif"
 COPY --from=builder /eslint/node_modules/ /node_modules/
 RUN set -eux \
-	&& apk add --no-cache nodejs curl\
+	&& apk add --no-cache nodejs curl jq\
 	&& ln -sf /node_modules/eslint/bin/eslint.js /usr/bin/eslint

@@ -5,11 +5,26 @@ TIMESTAMP=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 SRC_DIR=$1; shift
 ESLINT_OPTS=$@
 
+# example on how to get last n chars from string
+# str = "Test"
+# ${str: -2}  # displays 'st'
+
+# If there's a SARIF_CATEGORY make sure it ends in /
+if [ ! -z "$SARIF_CATEGORY" ]
+then
+  if [ ! "${SARIF_CATEGORY:-1}" = "/" ]
+  then
+    SARIF_CATEGORY="$SARIF_CATEGORY/"
+  fi
+fi
+
+AUTOMATION_ID="$SARIF_CATEGORY$GITHUB_RUN_ID"
+
 cd /github/workspace/$SRC_DIR
 /usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif $ESLINT_OPTS .
 
 # Command to add 'category' to SARIF
-# jq '.runs[0] |= . + {"automationDetails": {"id": "my-category/"}}' eslint.sarif
+jq --arg AUTOMATION_ID "$AUTOMATION_ID" '.runs[0] |= . + {"automationDetails": {"id": "$AUTOMATION_ID"}}' eslint.sarif
 
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
