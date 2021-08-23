@@ -8,6 +8,9 @@ ESLINT_OPTS=$@
 cd /github/workspace/$SRC_DIR
 /usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif $ESLINT_OPTS .
 
+# Command to add 'category' to SARIF
+# jq '.runs[0] |= . + {"automationDetails": {"id": "my-category/"}}' eslint.sarif
+
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
 curl \
