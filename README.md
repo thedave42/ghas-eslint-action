@@ -65,3 +65,71 @@ The will run ESLint against a single application in the root of the repository.
               
           - name: GHAS ESLint Action
             uses: thedave42/ghas-eslint-action@main
+
+This workflow will run scans on two apps in a monorepo in parallel 
+
+    on:
+      push:
+        branches: [ main ]
+      pull_request:
+        # The branches below must be a subset of the branches above
+        branches: [ main ]
+      schedule:
+        - cron: "20 5 * * 5"
+
+    jobs:
+      scan-has-1-error-app:
+        name: 'Scan has-1-error app'
+        runs-on: ubuntu-latest
+
+        strategy:
+          matrix:
+            node-version: ['14']
+
+        steps:
+          - name: 'Checkout code'
+            uses: actions/checkout@v2
+
+          - name: Use Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v1
+            with:
+              node-version: ${{ matrix.node-version }}
+
+          - name: Build app
+            run: |
+              cd ./app1
+              npm i
+
+          - name: 'Run ESLint SARIF Action'
+            uses: thedave42/ghas-eslint-action@main
+            with:
+              src-dir: ./app1
+              sarif-category: app1
+
+      scan-has-2-warnings-app:
+        name: 'Scan has-2-warnings app'
+        runs-on: ubuntu-latest
+
+        strategy:
+          matrix:
+            node-version: ['14']
+
+        steps:
+          - name: 'Checkout code'
+            uses: actions/checkout@v2
+
+          - name: Use Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v1
+            with:
+              node-version: ${{ matrix.node-version }}
+
+          - name: Build app
+            run: |
+              cd ./app2
+              npm i
+
+          - name: 'Run ESLint SARIF Action'
+            uses: thedave42/ghas-eslint-action@main
+            with:
+              src-dir: ./app2
+              sarif-category: app2
