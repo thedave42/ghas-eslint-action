@@ -27,7 +27,7 @@ jobs:
 
       - name: Build app
         run: |
-          cd /tests/has_1_error
+          cd ./tests/has_1_error
           npm i
 
       - name: 'Run ESLint SARIF Action'
@@ -55,7 +55,7 @@ jobs:
 
       - name: Build app
         run: |
-          cd ./tests/has_2_warnings
+          cd tests/has_2_warnings
           npm i
 
       - name: 'Run ESLint SARIF Action'
