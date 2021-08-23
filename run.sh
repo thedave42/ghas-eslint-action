@@ -24,7 +24,7 @@ cd /github/workspace/$SRC_DIR
 /usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o eslint.sarif $ESLINT_OPTS .
 
 # Command to add 'category' to SARIF
-jq --arg AUTOMATION_ID "$AUTOMATION_ID" '.runs[0] |= . + {"automationDetails": {"id": "$AUTOMATION_ID"}}' eslint.sarif
+jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' eslint.sarif
 
 DATA=`gzip -cf eslint.sarif | base64 -w0`
 
