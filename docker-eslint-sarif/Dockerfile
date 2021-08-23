@@ -50,5 +50,5 @@ LABEL \
 	repo="https://github.com/cytopia/docker-eslint"
 COPY --from=builder /eslint/node_modules/ /node_modules/
 RUN set -eux \
-	&& apk add --no-cache nodejs curl\
+	&& apk add --no-cache nodejs curl jq\
 	&& ln -sf /node_modules/eslint/bin/eslint.js /usr/bin/eslint
