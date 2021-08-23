@@ -1,0 +1,22 @@
+{
+  "name": "ghast-eslint-action-test-app",
+  "version": "1.0.0",
+  "description": "Install necessary eslint depedencies for scan",
+  "author": "dave@digitalnoise.net",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^4.0.2",
+    "jest": "^27.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thedave42/ghas-eslint-action.git"
+  }
+}
