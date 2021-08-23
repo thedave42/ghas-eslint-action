@@ -8,6 +8,10 @@ Runs eslint and uploads the results to GitHub Advanced security.  ESLint will us
 
 OPTIONAL: The directory to scan with ESLint.  Will default to the root directory of the repository if not specified.
 
+### `sarif-category`
+
+OPTIONAL: Used to distinguish between multiple analyses performed on different parts of the code. e.g. different apps in a monorepo
+
 ### `eslint-opts`
 
 OPTIONAL: Any additional options to pass to the eslint command line.
