@@ -25,6 +25,7 @@ cd /github/workspace/$SRC_DIR
 jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' $GITHUB_RUN_ID.sarif > $GITHUB_JOB.sarif
 if [ $? -ne 0 ]
 then
+  echo Failed with error code $?
   exit $?
 fi
 
