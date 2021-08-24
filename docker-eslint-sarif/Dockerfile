@@ -1,7 +1,7 @@
 # Adapted from https://github.com/cytopia/docker-eslint
 # by cytopia <cytopia@everythingcli.org>
 #
-FROM node:lts-alpine as builder
+FROM node:lts-alpine-3.14 as builder
 
 #Old way of installing nodejs/npm - cannot install npm v6 which is needed for eslint-formatter-sarif
 #
