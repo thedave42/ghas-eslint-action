@@ -51,5 +51,5 @@ LABEL \
 COPY --from=builder /eslint/node_modules/ /node_modules/
 RUN set -eux \
 	&& apk add --no-cache nodejs curl \
-	&& curl -OL https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o /tmp/jq-linux64 && chmod a+x /tmp/jq-linux64 && mv /tmp/jq-linux64 /usr/bin/jq \
+	&& curl  -o /tmp/jq-linux64 https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && chmod a+x /tmp/jq-linux64 && mv /tmp/jq-linux64 /usr/bin/jq \
 	&& ln -sf /node_modules/eslint/bin/eslint.js /usr/bin/eslint
