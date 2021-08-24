@@ -21,7 +21,7 @@ fi
 AUTOMATION_ID="$SARIF_CATEGORY$GITHUB_RUN_ID"
 
 cd /github/workspace/$SRC_DIR
-/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o $GITHUB_RUN_ID.sarif $ESLINT_OPTS . || exit 0
+/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o $GITHUB_RUN_ID.sarif $ESLINT_OPTS .; exit 0
 jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' $GITHUB_RUN_ID.sarif > $GITHUB_JOB.sarif
 if [ ! $? -eq 0 ]
 then
