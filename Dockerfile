@@ -1,4 +1,4 @@
-FROM ghcr.io/thedave42/docker-eslint-sarif:0.0.11
+FROM ghcr.io/thedave42/docker-eslint-sarif:0.0.12
 
 COPY run.sh /run.sh
 
