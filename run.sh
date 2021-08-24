@@ -21,12 +21,17 @@ fi
 AUTOMATION_ID="$SARIF_CATEGORY$GITHUB_RUN_ID"
 
 cd /github/workspace/$SRC_DIR
-/usr/bin/eslint -f @microsoft/eslint-formatter-sarif $ESLINT_OPTS . | jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' >eslint.sarif 
+/usr/bin/eslint -f @microsoft/eslint-formatter-sarif -o $GITHUB_RUN_ID.sarif $ESLINT_OPTS . || exit 0
+jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' $GITHUB_RUN_ID.sarif > $GITHUB_JOB.sarif
+if [ $? -ne 0 ]
+then
+  exit $?
+fi
 
 # Command to add 'category' to SARIF file
 # jq --arg a $AUTOMATION_ID '.runs[0] |= . + {"automationDetails": {"id": $a}}' eslint.sarif
 
-DATA=`gzip -cf eslint.sarif | base64 -w0`
+DATA=`gzip -cf $GITHUB_JOB.sarif | base64 -w0`
 
 curl \
   -X POST \
